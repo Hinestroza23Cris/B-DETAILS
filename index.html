@@ -23,9 +23,9 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{font-family:'Montserrat',sans-serif;color:var(--ink);background:#333;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:'Montserrat',sans-serif;color:var(--ink);background:#222;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 
-/* MARGEN Y ESTRUCTURA A4 */
+/* MARGEN Y ESTRUCTURA A4 (ESCRITORIO / PDF) */
 .page{
   width:210mm;
   min-height:295mm;
@@ -36,6 +36,8 @@ body{font-family:'Montserrat',sans-serif;color:var(--ink);background:#333;-webki
   background:var(--bg);
   position:relative;
   overflow:hidden;
+  margin:6mm auto;
+  box-shadow:0 4mm 15mm rgba(0,0,0,0.3);
 }
 .page:last-of-type{page-break-after:auto;break-after:auto}
 
@@ -43,8 +45,11 @@ body{font-family:'Montserrat',sans-serif;color:var(--ink);background:#333;-webki
 .page::before{content:"";position:absolute;inset:4mm;border:0.3mm solid var(--gold);pointer-events:none}
 .page::after{content:"";position:absolute;inset:5.2mm;border:0.4mm solid var(--red);opacity:0.8;pointer-events:none}
 
-@media screen{.page{margin:6mm auto;box-shadow:0 4mm 15mm rgba(0,0,0,0.3)}}
-@media print{body{background:none}.wa{box-shadow:none}}
+@media print{
+  body{background:none}
+  .page{margin:0;box-shadow:none}
+  .wa{box-shadow:none}
+}
 
 /* ENCABEZADOS Y PIES */
 .hd{display:flex;justify-content:space-between;align-items:center;padding-bottom:2mm;margin-bottom:3mm;border-bottom:0.3mm solid var(--red)}
@@ -73,16 +78,15 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
 .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:24pt;color:var(--red);margin:2mm 0 1mm}
 .wel{max-width:130mm;margin:0 auto 4mm;font-size:9.5pt;font-weight:500;line-height:1.5;color:var(--ink)}
 
-/* PORTADA: Altura fija reducida (105mm) para que haga espacio al logo sin desbordarse */
 .cover-grid{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;gap:3mm; width:100%; flex-grow:0; height:105mm; margin-bottom:auto}
 .cover-grid .ph:first-child{grid-row:span 2}
 .cover-grid img{width:100%;height:100%;object-fit:cover}
 
-/* ADORNO REUBICADO PARA LA PÁGINA 4 */
+/* ADORNO */
 .orn{display:flex;align-items:center;gap:3mm;margin:12mm auto 0;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:14pt;color:var(--red); width:90%}
 .orn::before,.orn::after{content:"";flex:1;height:0.3mm;background:var(--gold)}
 
-/* GALERÍA CREATIVA - VUELVE EL EFECTO REVISTA (GRANDES) */
+/* GALERÍA CREATIVA */
 .gallery-creative {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -100,7 +104,7 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
 }
 .gallery-creative .pic-box img {
   width: 100%;
-  height: 100%; /* La imagen fluye natural */
+  height: 100%;
   object-fit: cover;
   flex-grow: 1;
 }
@@ -115,20 +119,18 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
   letter-spacing: 0.03em;
 }
 
-/* Tamaños dinámicos grandes (min-height permite que las fotos luzcan) */
 .pic-box.main { grid-column: span 2; grid-row: span 2; min-height: 100mm; }
 .pic-box.tall { grid-row: span 2; min-height: 100mm; }
 .pic-box.wide { grid-column: span 2; min-height: 48mm; }
 .pic-box.normal { min-height: 48mm; }
 
-/* === SOLUCIÓN ESTRICTA SOLO PARA LA FOTO DE LA PÁG 4 === */
 .pic-box.full-strict { 
   grid-column: 1 / -1; 
-  height: 36mm; /* Aquí es fijo, NO usamos min-height */
-  overflow: hidden; /* Corta si se sale */
+  height: 36mm; 
+  overflow: hidden;
 }
 .pic-box.full-strict img {
-  height: 10px; /* Truquito CSS para que no estire la caja y solo ocupe lo que sobra */
+  height: 10px;
 }
 
 /* SECCIÓN FINAL - PERSONALIZACIÓN */
@@ -142,6 +144,39 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
 .cta{margin-top:5mm;text-align:center}
 .cta h3{margin:0 0 3mm;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:18pt;color:var(--red-dark)}
 .wa{display:inline-block;padding:3mm 9mm;border-radius:8mm;background:#25D366;color:#FFF;font-size:9.5pt;font-weight:800;letter-spacing:.03em;text-decoration:none;box-shadow:0 1mm 4mm rgba(37,211,102,0.4)}
+
+
+/* ==========================================
+   ADAPTACIÓN PARA CELULARES (RESPONSIVE)
+   ================================          */
+@media screen and (max-width: 768px) {
+  body {
+    background: #1a1a1a;
+    padding: 10px 5px;
+  }
+  .page {
+    width: 100% !important;
+    max-width: 210mm;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 0 auto 15mm auto !important;
+    padding: 8mm 6mm;
+    overflow: visible !important;
+  }
+  .pg {
+    position: relative !important;
+    bottom: auto !important;
+    margin-top: 8mm;
+  }
+  .cover {
+    height: auto !important;
+    padding-bottom: 10mm !important;
+  }
+  .cover-grid {
+    height: 80mm !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -149,7 +184,6 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
 <!-- PÁGINA 1 · PORTADA -->
 <section class="page cover">
   <div class="cover-top">
-    <!-- Ajuste aquí: max-height para controlar que el logo no empuje todo hacia abajo -->
     <h1><img src="IMG/logo.png" alt="B Details Logo" style="max-width: 170px; max-height: 28mm; object-fit: contain;"></h1>
     <p class="sub">Catálogo de Detalles &amp; Ramos Eternos</p>
     <p class="wel">Sorprende a esa persona especial con arreglos florales inolvidables y personalizados hechos a mano.</p>
@@ -283,7 +317,6 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
     </div>
   </div>
 
-  <!-- ADORNO REUTILIZADO AQUÍ PARA LLENAR EL ESPACIO -->
   <div class="orn">♥ Expresa tu amor con detalles únicos ♥</div>
 
   <div class="pg">Página 4 de 6</div>
@@ -359,7 +392,7 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
 
   <div class="cta">
     <h3>📱 ¡Haz tu Pedido Personalizado Ahora!</h3>
-    <!-- Número de WhatsApp actualizado -->
+    <!-- Número de WhatsApp configurado -->
     <a class="wa" href="https://wa.me/573238017145?text=Hola%20B%20Details%2C%20quiero%20cotizar%20un%20pedido%20personalizado" target="_blank" rel="noopener">Escríbenos directamente a WhatsApp</a>
     <p style="margin-top:3mm;font-size:8pt;font-style:italic;color:var(--mute)">Recibimos todos los medios de pago · Haz tu reserva con anticipación</p>
   </div>
