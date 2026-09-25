@@ -147,7 +147,7 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
 
 
 /* ==========================================
-   ADAPTACIÓN PARA CELULARES (RESPONSIVE)
+   ADAPTACIÓN PERFECTA PARA CELULARES
    ================================          */
 @media screen and (max-width: 768px) {
   body {
@@ -160,21 +160,40 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
     height: auto !important;
     min-height: auto !important;
     max-height: none !important;
-    margin: 0 auto 15mm auto !important;
+    margin: 0 auto 12mm auto !important;
     padding: 8mm 6mm;
     overflow: visible !important;
   }
   .pg {
     position: relative !important;
     bottom: auto !important;
-    margin-top: 8mm;
+    margin-top: 6mm !important;
+    display: block !important;
   }
   .cover {
     height: auto !important;
-    padding-bottom: 10mm !important;
+    padding-bottom: 6mm !important;
   }
+  /* Cuadrícula optimizada para portadas en celulares */
   .cover-grid {
-    height: 80mm !important;
+    height: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto !important;
+    gap: 3mm !important;
+    margin-bottom: 4mm !important;
+  }
+  .cover-grid .ph:first-child {
+    grid-column: span 2 !important;
+    grid-row: span 1 !important;
+    height: 55mm !important;
+  }
+  .cover-grid .ph {
+    height: 40mm !important;
+  }
+  .cover-grid img {
+    height: 100% !important;
+    object-fit: cover !important;
   }
 }
 </style>
@@ -392,7 +411,6 @@ h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red)
 
   <div class="cta">
     <h3>📱 ¡Haz tu Pedido Personalizado Ahora!</h3>
-    <!-- Número de WhatsApp configurado -->
     <a class="wa" href="https://wa.me/573238017145?text=Hola%20B%20Details%2C%20quiero%20cotizar%20un%20pedido%20personalizado" target="_blank" rel="noopener">Escríbenos directamente a WhatsApp</a>
     <p style="margin-top:3mm;font-size:8pt;font-style:italic;color:var(--mute)">Recibimos todos los medios de pago · Haz tu reserva con anticipación</p>
   </div>
