@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B Details · Catálogo de Detalles & Ramos Eternos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@page { size: A4 portrait; margin: 0; }
+:root{
+  --bg:#FFF9F5;
+  --red:#D62828;
+  --red-dark:#9E0000;
+  --pink:#FF4D6D;
+  --pink-light:#FFCCD5;
+  --gold:#D4AF37;
+  --ink:#1A1A1A;
+  --mute:#555555;
+  --white:#FFFFFF;
+  --line:rgba(214, 40, 40, 0.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Montserrat',sans-serif;color:var(--ink);background:#333;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+/* MARGEN Y ESTRUCTURA A4 */
+.page{
+  width:210mm;
+  min-height:295mm;
+  max-height:295mm;
+  padding:10mm 12mm;
+  page-break-after:always;
+  break-after:page;
+  background:var(--bg);
+  position:relative;
+  overflow:hidden;
+}
+.page:last-of-type{page-break-after:auto;break-after:auto}
+
+/* Marco decorativo Rojo/Dorado */
+.page::before{content:"";position:absolute;inset:4mm;border:0.3mm solid var(--gold);pointer-events:none}
+.page::after{content:"";position:absolute;inset:5.2mm;border:0.4mm solid var(--red);opacity:0.8;pointer-events:none}
+
+@media screen{.page{margin:6mm auto;box-shadow:0 4mm 15mm rgba(0,0,0,0.3)}}
+@media print{body{background:none}.wa{box-shadow:none}}
+
+/* ENCABEZADOS Y PIES */
+.hd{display:flex;justify-content:space-between;align-items:center;padding-bottom:2mm;margin-bottom:3mm;border-bottom:0.3mm solid var(--red)}
+.brand{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:20pt;color:var(--red-dark);line-height:1}
+.hd span{font-size:7.5pt;font-weight:700;letter-spacing:.14em;color:var(--pink);text-transform:uppercase}
+.pg{position:absolute;left:0;right:0;bottom:6mm;text-align:center;font-size:7pt;font-weight:600;letter-spacing:.12em;color:var(--mute)}
+
+/* TÍTULOS */
+h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:20pt;color:var(--red-dark);line-height:1.1;margin:0 0 2mm}
+h2::after{content:"";display:block;width:18mm;height:0.8mm;background:var(--red);margin-top:1.5mm}
+
+/* FOTO PRINCIPAL DE SECCIÓN */
+.ph{margin:0;padding:1mm;background:var(--white);border:0.3mm solid var(--gold);box-shadow:0 1mm 3mm rgba(0,0,0,0.08)}
+.ph img{display:block;width:100%;height:var(--h,38mm);object-fit:cover;background:#FFF0F2}
+
+/* LISTADOS A 2 COLUMNAS */
+.listing{column-count:2;column-gap:6mm;margin:2mm 0 3mm;padding:0;list-style:none}
+.listing li{display:flex;justify-content:space-between;align-items:baseline;gap:2mm;padding:1.5mm 0;border-bottom:0.2mm dashed var(--line);font-size:8pt;line-height:1.2;break-inside:avoid}
+.p{flex:none;white-space:nowrap;font-weight:700;color:var(--red)}
+.n small{display:block;margin-top:.4mm;font-size:6.5pt;color:var(--mute);font-weight:400}
+
+/* PORTADA AJUSTADA (FLEXBOX) */
+.cover{text-align:center;background:linear-gradient(180deg, #FFF9F5 0%, #FFE6E8 100%); display:flex; flex-direction:column; padding-bottom: 14mm;}
+.cover-top { margin-top: 2mm; }
+.cover h1{margin:0}
+.sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:24pt;color:var(--red);margin:2mm 0 1mm}
+.wel{max-width:130mm;margin:0 auto 4mm;font-size:9.5pt;font-weight:500;line-height:1.5;color:var(--ink)}
+
+/* PORTADA: Altura fija reducida (105mm) para que haga espacio al logo sin desbordarse */
+.cover-grid{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;gap:3mm; width:100%; flex-grow:0; height:105mm; margin-bottom:auto}
+.cover-grid .ph:first-child{grid-row:span 2}
+.cover-grid img{width:100%;height:100%;object-fit:cover}
+
+/* ADORNO REUBICADO PARA LA PÁGINA 4 */
+.orn{display:flex;align-items:center;gap:3mm;margin:12mm auto 0;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:14pt;color:var(--red); width:90%}
+.orn::before,.orn::after{content:"";flex:1;height:0.3mm;background:var(--gold)}
+
+/* GALERÍA CREATIVA - VUELVE EL EFECTO REVISTA (GRANDES) */
+.gallery-creative {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3mm;
+  margin-top: 4mm;
+  grid-auto-flow: dense;
+}
+.gallery-creative .pic-box {
+  background: var(--white);
+  border: 0.3mm solid var(--gold);
+  padding: 1.5mm;
+  box-shadow: 0 1.5mm 4mm rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+.gallery-creative .pic-box img {
+  width: 100%;
+  height: 100%; /* La imagen fluye natural */
+  object-fit: cover;
+  flex-grow: 1;
+}
+.gallery-creative .pic-box span {
+  display: block;
+  font-size: 7.2pt;
+  font-weight: 800;
+  color: var(--red-dark);
+  text-align: center;
+  margin-top: 1.5mm;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Tamaños dinámicos grandes (min-height permite que las fotos luzcan) */
+.pic-box.main { grid-column: span 2; grid-row: span 2; min-height: 100mm; }
+.pic-box.tall { grid-row: span 2; min-height: 100mm; }
+.pic-box.wide { grid-column: span 2; min-height: 48mm; }
+.pic-box.normal { min-height: 48mm; }
+
+/* === SOLUCIÓN ESTRICTA SOLO PARA LA FOTO DE LA PÁG 4 === */
+.pic-box.full-strict { 
+  grid-column: 1 / -1; 
+  height: 36mm; /* Aquí es fijo, NO usamos min-height */
+  overflow: hidden; /* Corta si se sale */
+}
+.pic-box.full-strict img {
+  height: 10px; /* Truquito CSS para que no estire la caja y solo ocupe lo que sobra */
+}
+
+/* SECCIÓN FINAL - PERSONALIZACIÓN */
+.box{margin:2mm 0 4mm;padding:5mm 8mm;background:linear-gradient(135deg, #FFF0F2 0%, #FFE6E8 100%);border:0.4mm solid var(--red);text-align:center;border-radius:2mm}
+.box h2{font-size:20pt; margin-bottom: 2mm;}
+.box p{max-width:140mm;margin:0 auto 3mm;font-size:9pt;line-height:1.4;color:var(--ink)}
+.opts{max-width:130mm;margin:0 auto;padding:0;list-style:none;text-align:left;font-size:8.5pt}
+.opts li{position:relative;padding:1.5mm 0 1.5mm 5mm;border-bottom:0.2mm solid var(--pink-light);font-weight:600}
+.opts li::before{content:"♥";position:absolute;left:0;top:1.5mm;color:var(--red);font-size:7pt}
+
+.cta{margin-top:5mm;text-align:center}
+.cta h3{margin:0 0 3mm;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:18pt;color:var(--red-dark)}
+.wa{display:inline-block;padding:3mm 9mm;border-radius:8mm;background:#25D366;color:#FFF;font-size:9.5pt;font-weight:800;letter-spacing:.03em;text-decoration:none;box-shadow:0 1mm 4mm rgba(37,211,102,0.4)}
+</style>
+</head>
+<body>
+
+<!-- PÁGINA 1 · PORTADA -->
+<section class="page cover">
+  <div class="cover-top">
+    <!-- Ajuste aquí: max-height para controlar que el logo no empuje todo hacia abajo -->
+    <h1><img src="IMG/logo.png" alt="B Details Logo" style="max-width: 170px; max-height: 28mm; object-fit: contain;"></h1>
+    <p class="sub">Catálogo de Detalles &amp; Ramos Eternos</p>
+    <p class="wel">Sorprende a esa persona especial con arreglos florales inolvidables y personalizados hechos a mano.</p>
+  </div>
+  
+  <div class="cover-grid">
+    <figure class="ph"><img src="IMG/portada1.jpg" alt="Ramo principal B Details"></figure>
+    <figure class="ph"><img src="IMG/portada2.jpg" alt="Detalle especial"></figure>
+    <figure class="ph"><img src="IMG/portada3.jpg" alt="Arreglo de rosas"></figure>
+  </div>
+  
+  <div class="pg">Página 1 de 6</div>
+</section>
+
+<!-- PÁGINA 2 · RAMOS TRADICIONALES -->
+<section class="page">
+  <header class="hd"><div class="brand">B Details</div><span>Ramos Tradicionales</span></header>
+
+  <h2>Ramos Clásicos de Rosas Eternas</h2>
+  <figure class="ph" style="--h:42mm"><img src="IMG/ramo_clasico.jpg" alt="Ramo clásico de rosas eternas"></figure>
+  
+  <ul class="listing">
+    <li><span class="n">Ramo de 7 Rosas Eternas</span><span class="p">$35.000</span></li>
+    <li><span class="n">Ramo de 12 Rosas Eternas</span><span class="p">$50.000</span></li>
+    <li><span class="n">Ramo de 15 Rosas Eternas</span><span class="p">$60.000</span></li>
+    <li><span class="n">Ramo de 18 Rosas Eternas</span><span class="p">$70.000</span></li>
+    <li><span class="n">Ramo de 30 Rosas Eternas</span><span class="p">$100.000</span></li>
+    <li><span class="n">Ramo de 50 Rosas Eternas</span><span class="p">$150.000</span></li>
+    <li><span class="n">Ramo de 100 Rosas (Ramo Gigante)</span><span class="p">$290.000</span></li>
+  </ul>
+
+  <!-- GALERÍA TAMAÑO REVISTA -->
+  <div class="gallery-creative">
+    <div class="pic-box main">
+      <img src="IMG/foto_ramo1.jpg" alt="Ramo Gigante 100 Rosas">
+      <span>Ramo Gigante (100 Rosas)</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/foto_ramo2.jpg" alt="Ramo 15 Rosas">
+      <span>15 Rosas Pasión</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/foto_ramo3.jpg" alt="Ramo 30 Rosas">
+      <span>30 Rosas Deluxe</span>
+    </div>
+  </div>
+
+  <div class="pg">Página 2 de 6</div>
+</section>
+
+<!-- PÁGINA 3 · EDICIONES ESPECIALES (CORONAS Y FRASES) -->
+<section class="page">
+  <header class="hd"><div class="brand">B Details</div><span>Ediciones Especiales</span></header>
+
+  <h2>Ramos con Coronas, Frases &amp; Mallas</h2>
+  <figure class="ph" style="--h:36mm"><img src="IMG/ramo_especial.jpg" alt="Ramo especial con corona y frase"></figure>
+
+  <ul class="listing">
+    <li><span class="n">7 Rosas con Frase</span><span class="p">$43.000</span></li>
+    <li><span class="n">7 Rosas con Corona</span><span class="p">$40.000</span></li>
+    <li><span class="n">7 Rosas con Malla y Corona</span><span class="p">$48.000</span></li>
+    <li><span class="n">7 Rosas con Frase y Corona</span><span class="p">$48.000</span></li>
+    <li><span class="n">12 Rosas con Corona</span><span class="p">$55.000</span></li>
+    <li><span class="n">12 Rosas con Frase y Topper</span><span class="p">$61.000</span></li>
+    <li><span class="n">12 Rosas con Frase y Corona</span><span class="p">$63.000</span></li>
+    <li><span class="n">12 Rosas con Corona y Frase</span><span class="p">$70.000</span></li>
+    <li><span class="n">14 Rosas con Corona Princesa y Frase</span><span class="p">$78.000</span></li>
+    <li><span class="n">15 Rosas con Frase</span><span class="p">$68.000</span></li>
+    <li><span class="n">15 Rosas con Frase y Corona</span><span class="p">$73.000</span></li>
+    <li><span class="n">18 Rosas con Frase y Corona</span><span class="p">$90.000</span></li>
+    <li><span class="n">30 Rosas con Frase y Corona</span><span class="p">$113.000 / $120.000</span></li>
+    <li><span class="n">30 Rosas con Corona Princesa y Frase</span><span class="p">$128.000</span></li>
+  </ul>
+
+  <!-- GALERÍA TAMAÑO REVISTA -->
+  <div class="gallery-creative">
+    <div class="pic-box tall">
+      <img src="IMG/foto_corona1.jpg" alt="Corona Princesa">
+      <span>Corona de Princesa</span>
+    </div>
+    <div class="pic-box wide">
+      <img src="IMG/foto_corona2.jpg" alt="Frase Personalizada">
+      <span>Frases Personalizadas</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/foto_corona3.jpg" alt="Ramo con Malla">
+      <span>Malla Especial</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/foto_corona4.jpg" alt="Detalle Corona">
+      <span>Topper &amp; Detalles</span>
+    </div>
+  </div>
+
+  <div class="pg">Página 3 de 6</div>
+</section>
+
+<!-- PÁGINA 4 · COMBOS CON PELUCHES -->
+<section class="page">
+  <header class="hd"><div class="brand">B Details</div><span>Combos Especiales</span></header>
+
+  <h2>Ramos Combinados con Peluche</h2>
+  <figure class="ph" style="--h:42mm"><img src="IMG/combo_peluche.jpg" alt="Combo de ramo con peluche"></figure>
+
+  <ul class="listing">
+    <li><span class="n">7 Rosas + Peluche (40 cm)<small>$35.000 + $45.000</small></span><span class="p">$80.000</span></li>
+    <li><span class="n">7 Rosas + Corona + Peluche (70 cm)<small>$40.000 + $120.000</small></span><span class="p">$160.000</span></li>
+    <li><span class="n">12 Rosas + Frase + Corona + Peluche Ángel (45 cm)<small>$63.000 + $70.000</small></span><span class="p">$133.000</span></li>
+    <li><span class="n">12 Rosas + Corona + Peluche (85 cm)<small>$55.000 + $140.000</small></span><span class="p">$195.000</span></li>
+    <li><span class="n">15 Rosas + Frase + Peluche (70 cm)<small>$68.000 + $120.000</small></span><span class="p">$188.000</span></li>
+    <li><span class="n">7 Rosas + Peluche (40 cm)<small>Detalle mediano</small></span><span class="p">$80.000</span></li>
+  </ul>
+
+  <!-- GALERÍA: 3 NORMALES Y 1 CON RESTRICCIÓN ESTRICTA ('full-strict') -->
+  <div class="gallery-creative">
+    <div class="pic-box normal">
+      <img src="IMG/foto_peluche1.jpg" alt="Peluche Ángel">
+      <span>Ángel 45cm</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/foto_peluche2.jpg" alt="Peluche Gigante">
+      <span>Gigante 85cm</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/foto_peluche3.jpg" alt="Oso Clásico">
+      <span>Oso 40cm</span>
+    </div>
+    <div class="pic-box full-strict">
+      <img src="IMG/foto_peluche4.jpg" alt="Combo Completo">
+      <span>El Combo Romántico Perfecto</span>
+    </div>
+  </div>
+
+  <!-- ADORNO REUTILIZADO AQUÍ PARA LLENAR EL ESPACIO -->
+  <div class="orn">♥ Expresa tu amor con detalles únicos ♥</div>
+
+  <div class="pg">Página 4 de 6</div>
+</section>
+
+<!-- PÁGINA 5 · GIRASOLES Y CILINDROS VIP -->
+<section class="page">
+  <header class="hd"><div class="brand">B Details</div><span>Arreglos VIP &amp; Girasoles</span></header>
+
+  <h2>Cilindros de Rosas &amp; Girasoles</h2>
+  <figure class="ph" style="--h:42mm"><img src="IMG/cilindro.jpg" alt="Cilindro de Rosas y Girasoles"></figure>
+
+  <ul class="listing">
+    <li><span class="n">Ramo de 6 Girasoles con Frase</span><span class="p">$68.000</span></li>
+    <li><span class="n">Ramo 6 Girasoles + Peluche (85 cm)<small>$68.000 + $140.000</small></span><span class="p">$208.000</span></li>
+    <li><span class="n">Cilindro de 30 Rosas con Corona</span><span class="p">$150.000</span></li>
+    <li><span class="n">Cilindro 30 Rosas + Corona + Peluche (50 cm)<small>$150.000 + $65.000</small></span><span class="p">$215.000</span></li>
+  </ul>
+
+  <!-- GALERÍA TAMAÑO REVISTA -->
+  <div class="gallery-creative">
+    <div class="pic-box wide">
+      <img src="IMG/foto_girasol1.jpg" alt="Girasoles">
+      <span>6 Girasoles Radiantes</span>
+    </div>
+    <div class="pic-box tall">
+      <img src="IMG/foto_cilindro1.jpg" alt="Cilindro">
+      <span>Cilindro VIP</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/foto_girasol2.jpg" alt="Girasol Peluche">
+      <span>Girasoles + Peluche</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/foto_cilindro2.jpg" alt="Cilindro Peluche">
+      <span>Cilindro + Corona</span>
+    </div>
+  </div>
+
+  <div class="pg">Página 5 de 6</div>
+</section>
+
+<!-- PÁGINA 6 · PERSONALIZA TU DETALLE Y CONTACTO -->
+<section class="page">
+  <header class="hd"><div class="brand">B Details</div><span>Detalles Personalizados</span></header>
+
+  <div class="box">
+    <h2>¡Arma tu Detalle a Tu Gusto!</h2>
+    <p>Personalizamos cada detalle según la ocasión. Elige la cantidad de rosas o girasoles y acompáñalos con tus complementos favoritos:</p>
+    <ul class="opts">
+      <li>Cintas satinadas impresas con frases personalizadas.</li>
+      <li>Coronas de Reina o Princesa.</li>
+      <li>Peluches de todos los tamaños (40 cm hasta 85 cm).</li>
+      <li>Toppers temáticos, chocolates y globos.</li>
+    </ul>
+  </div>
+
+  <!-- GALERÍA TAMAÑO REVISTA -->
+  <div class="gallery-creative">
+    <div class="pic-box main">
+      <img src="IMG/personalizado1.jpg" alt="Detalle Premium">
+      <span>Arma tu propio estilo</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/personalizado2.jpg" alt="Cintas">
+      <span>Cintas &amp; Frases</span>
+    </div>
+    <div class="pic-box normal">
+      <img src="IMG/personalizado3.jpg" alt="Chocolates">
+      <span>Chocolates &amp; Globos</span>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h3>📱 ¡Haz tu Pedido Personalizado Ahora!</h3>
+    <!-- Número de WhatsApp actualizado -->
+    <a class="wa" href="https://wa.me/573238017145?text=Hola%20B%20Details%2C%20quiero%20cotizar%20un%20pedido%20personalizado" target="_blank" rel="noopener">Escríbenos directamente a WhatsApp</a>
+    <p style="margin-top:3mm;font-size:8pt;font-style:italic;color:var(--mute)">Recibimos todos los medios de pago · Haz tu reserva con anticipación</p>
+  </div>
+
+  <div class="pg">Página 6 de 6</div>
+</section>
+
+</body>
+</html>
